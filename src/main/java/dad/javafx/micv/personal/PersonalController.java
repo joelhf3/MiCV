@@ -54,15 +54,21 @@ public class PersonalController implements Initializable {
 		if (ov != null) {
 			identificacionText.textProperty().unbindBidirectional(ov.identificacionProperty());
 			nombreText.textProperty().unbindBidirectional(ov.nombreProperty());
-			apellidosText.textProperty().unbindBidirectional(ov.apellidosProperty());			
+			apellidosText.textProperty().unbindBidirectional(ov.apellidosProperty());
+			// TODO desbindear el resto de componentes
 		}
 
 		if (nv != null) {
 			identificacionText.textProperty().bindBidirectional(nv.identificacionProperty());
 			nombreText.textProperty().bindBidirectional(nv.nombreProperty());
 			apellidosText.textProperty().bindBidirectional(nv.apellidosProperty());
+			// TODO bindear el resto de componentes
 		}
 		
+	}
+	
+	public GridPane getView() {
+		return view;
 	}
 
 	public final ObjectProperty<Personal> personalProperty() {
