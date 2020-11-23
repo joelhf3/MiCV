@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Nacionalidad {
+	
 	private StringProperty denominacion = new SimpleStringProperty();
 	
 	public Nacionalidad() {}

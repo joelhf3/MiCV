@@ -21,8 +21,7 @@ public class Personal {
 	private StringProperty codigoPostal = new SimpleStringProperty();
 	private StringProperty localidad = new SimpleStringProperty();
 	private StringProperty pais = new SimpleStringProperty();
-	private ListProperty<Nacionalidad> nacionalidades = new SimpleListProperty<Nacionalidad>(
-			FXCollections.observableArrayList());
+	private ListProperty<Nacionalidad> nacionalidades = new SimpleListProperty<Nacionalidad>(FXCollections.observableArrayList());
 
 	public final StringProperty identificacionProperty() {
 		return this.identificacion;
