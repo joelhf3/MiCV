@@ -12,6 +12,7 @@ import java.util.Scanner;
 import dad.javafx.micv.model.Nacionalidad;
 import dad.javafx.micv.model.Personal;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -144,6 +145,8 @@ public class PersonalController implements Initializable {
     @FXML
     void eliminarNacionalidad(ActionEvent event) {
 
+    	nacionalidadListview.getItems().remove(nacionalidadListview.getSelectionModel().getSelectedIndex());
+    	
     }
 
     @FXML
@@ -169,6 +172,7 @@ public class PersonalController implements Initializable {
 	    	nuevaNacionalidad.setSelectedItem(nacionalidad.get(0));
 	    	nuevaNacionalidad.showAndWait();
 	    	
+	    	nacionalidadListview.getItems().add(new Nacionalidad(nuevaNacionalidad.getSelectedItem()));
 	    	
 		} 
 		catch (FileNotFoundException e) 

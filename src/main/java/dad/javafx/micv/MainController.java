@@ -17,9 +17,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MainController implements Initializable {
@@ -52,6 +57,10 @@ public class MainController implements Initializable {
 
     @FXML
     private Tab conocimientosTab;
+    
+    private Alert alerta;
+    
+    private File archivo;
 
 	public MainController() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
@@ -99,7 +108,8 @@ public class MainController implements Initializable {
     		
     		try {
     			cv.set(JSONUtils.fromJson(cvFile, CV.class));
-    			App.info("Se ha abierto el fichero " + cvFile.getName() + " correctamente.", "Pues eso...");
+    			App.info("Se ha abierto el fichero " + cvFile.getName() + " correctamente.", "");
+    			archivo = cvFile;
 			} catch (JsonSyntaxException|IOException e) {
 				App.error("Ha ocurrido un error al abrir " + cvFile, e.getMessage());
 			}
@@ -115,37 +125,57 @@ public class MainController implements Initializable {
 
     @FXML
     void onCerrarAction(ActionEvent event) {
-
+    	
+    	alerta = new Alert(AlertType.CONFIRMATION);
+    	alerta.setHeaderText("¿Seguro que desea salir?");
+    	alerta.setContentText("Los cambios no guardados se perderán.");
+    	alerta.showAndWait();
+    	
+    	if(alerta.getResult() == ButtonType.OK)
+    	{
+    		Stage stage = (Stage) getView().getScene().getWindow();
+    	    stage.close();
+    	}
     }
 
     @FXML
-    void onGuardarAction(ActionEvent event) {
-
+    void onGuardarAction(ActionEvent event) 
+    {
+    	if (archivo != null) 
+    	{
+    		try 
+    		{
+    			JSONUtils.toJson(archivo, cv.get());
+			} 
+    		catch (JsonSyntaxException|IOException e) 
+    		{
+				App.error("Ha ocurrido un error al guardar " + archivo, e.getMessage());
+			}
+    	}
     }
 
     @FXML
     void onGuardarComoAction(ActionEvent event) {
 
-	    	FileChooser fileChooser = new FileChooser();
-	    	fileChooser.setTitle("Guardar un currículum");
-	    	fileChooser.getExtensionFilters().add(new ExtensionFilter("Currículum (*.cv)", "*.cv"));
-	    	fileChooser.getExtensionFilters().add(new ExtensionFilter("Todos los archivos (*.*)", "*.*"));
-	    	File cvFile = fileChooser.showSaveDialog(App.getPrimaryStage());
-	    	if (cvFile != null) {
+	    FileChooser fileChooser = new FileChooser();
+	    fileChooser.setTitle("Guardar un currículum");
+	    fileChooser.getExtensionFilters().add(new ExtensionFilter("Currículum (*.cv)", "*.cv"));
+	    fileChooser.getExtensionFilters().add(new ExtensionFilter("Todos los archivos (*.*)", "*.*"));
+	    File cvFile = fileChooser.showSaveDialog(App.getPrimaryStage());
+	    if (cvFile != null) {
 
-	    		try {
-	    			JSONUtils.toJson(cvFile, cv.get());
-				} catch (JsonSyntaxException|IOException e) {
-					App.error("Ha ocurrido un error al guardar " + cvFile, e.getMessage());
-				}
+	    	try {
+	    		JSONUtils.toJson(cvFile, cv.get());
+			} catch (JsonSyntaxException|IOException e) {
+				App.error("Ha ocurrido un error al guardar " + cvFile, e.getMessage());
+			}
 	    		
-	    	}
-    	
+	    }
     }
 
     @FXML
-    void onNuevoAction(ActionEvent event) {
-    	System.out.println("Nuevo");
+    void onNuevoAction(ActionEvent event) 
+    {
     	cv.set(new CV());
     }
     
