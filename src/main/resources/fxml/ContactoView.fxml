@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<SplitPane dividerPositions="0.33, 0.66" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane fx:id="view" dividerPositions="0.33, 0.66" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-      <TitledPane collapsible="false" prefHeight="200.0" prefWidth="200.0" text="Teléfonos">
+      <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" text="Teléfonos">
          <content>
             <GridPane alignment="CENTER" hgap="5.0" vgap="5.0">
               <columnConstraints>
@@ -25,9 +25,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="nuevoTelefono" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-                  <Button fx:id="quitarTelefono" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <TableView fx:id="tablaTelefono" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647">
+                  <Button fx:id="nuevoTelefono" mnemonicParsing="false" onAction="#insertarTelefono" prefHeight="25.0" prefWidth="59.0" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                  <Button fx:id="quitarTelefono" mnemonicParsing="false" onAction="#eliminarTelefono" text="Eliminar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <TableView fx:id="tablaTelefono" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647">
                     <columns>
                       <TableColumn prefWidth="150.0" text="Número" />
                       <TableColumn prefWidth="150.0" text="Tipo" />
@@ -37,7 +37,7 @@
             </GridPane>
          </content>
       </TitledPane>
-      <TitledPane collapsible="false" prefHeight="200.0" prefWidth="200.0" text="Direcciones de correo">
+      <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" text="Direcciones de correo">
          <content>
             <GridPane alignment="CENTER" hgap="5.0" vgap="5.0">
                <columnConstraints>
@@ -50,9 +50,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="nuevoEmail" mnemonicParsing="false" prefWidth="59.0" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-                  <Button fx:id="quitarEmail" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <TableView fx:id="tablaEmail" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647">
+                  <Button fx:id="nuevoEmail" mnemonicParsing="false" onAction="#insertarEmail" prefWidth="59.0" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                  <Button fx:id="quitarEmail" mnemonicParsing="false" onAction="#eliminarEmail" text="Eliminar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <TableView fx:id="tablaEmail" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647">
                      <columns>
                         <TableColumn prefWidth="300.0" text="Email" />
                      </columns>
@@ -61,7 +61,7 @@
             </GridPane>
          </content>
       </TitledPane>
-      <TitledPane collapsible="false" prefHeight="200.0" prefWidth="200.0" text="Webs">
+      <TitledPane collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" text="Webs">
          <content>
             <GridPane alignment="CENTER" hgap="5.0" vgap="5.0">
                <columnConstraints>
@@ -74,9 +74,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="nuevaURL" mnemonicParsing="false" prefWidth="59.0" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-                  <Button fx:id="nuevaURL" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <TableView fx:id="tablaURL" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647">
+                  <Button fx:id="nuevaURL" mnemonicParsing="false" onAction="#insertarURL" prefWidth="59.0" text="Añadir" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+                  <Button fx:id="quitarURL" mnemonicParsing="false" onAction="#eliminarURL" text="Eliminar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <TableView fx:id="tablaURL" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="2147483647">
                      <columns>
                         <TableColumn prefWidth="300.0" text="URL" />
                      </columns>
