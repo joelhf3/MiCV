@@ -8,6 +8,10 @@ import java.util.ResourceBundle;
 import com.google.gson.JsonSyntaxException;
 
 import dad.javafx.micv.model.CV;
+import dad.javafx.micv.personal.ConocimientosController;
+import dad.javafx.micv.personal.ContactoController;
+import dad.javafx.micv.personal.ExperienciaController;
+import dad.javafx.micv.personal.FormacionController;
 import dad.javafx.micv.personal.PersonalController;
 import dad.javafx.micv.utils.JSONUtils;
 import javafx.beans.property.ObjectProperty;
@@ -32,6 +36,10 @@ public class MainController implements Initializable {
 	// controllers
 	
 	private PersonalController personalController = new PersonalController();
+	private ContactoController contactoController = new ContactoController();
+	private FormacionController formacionController = new FormacionController();
+	private ExperienciaController experienciaController = new ExperienciaController();
+	private ConocimientosController conocimientosController = new ConocimientosController();
 	// TODO resto de controladores
 	
 	// model
@@ -72,6 +80,10 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		personalTab.setContent(personalController.getView());
+		formacionTab.setContent(formacionController.getView());
+		experienciaTab.setContent(experienciaController.getView());
+		conocimientosTab.setContent(conocimientosController.getView());
+		contactoTab.setContent(contactoController.getView());
 		
 		cv.addListener((o, ov, nv) -> onCVChanged(o, ov, nv));
 		
@@ -82,12 +94,18 @@ public class MainController implements Initializable {
 
 		if (ov != null) {
 			personalController.personalProperty().unbind();
-			// TODO desbindear el resto de controladores
+			formacionController.tituloProperty().unbind();
+			experienciaController.experienciaProperty().unbind();
+			conocimientosController.conocimientoProperty().unbind();
+			contactoController.contactoProperty().unbind();
 		}
 		
 		if (nv != null) {
 			personalController.personalProperty().bind(nv.personalProperty());
-			// TODO bindear el resto de controladores
+			formacionController.tituloProperty().bind(nv.tituloProperty());
+			experienciaController.experienciaProperty().bind(nv.experienciaProperty());
+			conocimientosController.conocimientoProperty().bind(nv.conocimientoProperty());
+			contactoController.contactoProperty().bind(nv.contactoProperty());
 		}
 		
 	}
